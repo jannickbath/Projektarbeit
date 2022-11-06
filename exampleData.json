@@ -1,0 +1,24 @@
+{
+    "hotels": [
+        {
+            "name": "Sommerhaus",
+            "description": "Ein wunderschönes Haus, mit einem atemberaubendem Ausblick",
+            "coords": [
+                "lat",
+                "long"
+            ],
+            "images": [
+                "https://blah.blah.com/images/blahimage",
+                "https://blah.blah.com/images/blahimage",
+                "https://blah.blah.com/images/blahimage"
+            ],
+            "reviews": [
+                {
+                    "author": "peter",
+                    "rating": 5,
+                    "body": "Lorem ipsum sit dolor amet"
+                }
+            ]
+        }
+    ]
+}

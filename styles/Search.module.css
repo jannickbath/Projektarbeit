@@ -1,0 +1,24 @@
+.search
+{
+    display: grid;
+    height: 500px;
+    place-items: center;
+}
+
+.search form
+{
+    display: flex;
+    gap: 1rem;
+}
+
+.search form input,
+.search form button
+{
+    border-radius: 5px;
+}
+
+.search form button
+{
+    padding: .5rem 2rem;
+    background-color: violet;
+}
