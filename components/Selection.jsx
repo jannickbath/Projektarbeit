@@ -5,10 +5,26 @@ import Image from 'next/image';
 import imgLike from "../assets/like.png";
 import imgDismiss from "../assets/dismiss.png";
 import imgFavorite from "../assets/favorite.png";
+import { useState } from 'react';
 
-export default function Selection(props) {
+export default function Selection(props)
+{
     const data = props.data;
     const changeRating = props.changeRating;
+
+    const [animation, setAnimation] = useState("");
+
+    function changeAnimation(type)
+    {
+        const animationDuration = 500; //ms
+        setAnimation(type);
+
+        // Remove animation class after it's finished
+        setTimeout(() =>
+        {
+            setAnimation("");
+        }, animationDuration);
+    }
 
     return (
         <div className={styles.selection}>
@@ -22,18 +38,23 @@ export default function Selection(props) {
                     </div>
                     <div className={styles.overlay}></div>
                 </div>
+                <div className={styles.background_icon}>
+                    <Image src={imgLike} className={animation === "like" && "anim_popout"}></Image>
+                    <Image src={imgDismiss} className={animation === "dislike" && "anim_popout"}></Image>
+                    <Image src={imgFavorite} className={animation === "favorite" && "anim_popout"}></Image>
+                </div>
             </div>
             <div className={styles.button_section}>
-                <button className={styles.dismiss} onClick={() => changeRating(-0.1)}>
+                <button className={styles.dismiss} onClick={() => { changeAnimation("dislike"); changeRating(-0.1); }}>
                     <Image src={imgDismiss}></Image>
                 </button>
-                <button className={styles.favorite} onClick={() => changeRating(+0.3)}>
+                <button className={styles.favorite} onClick={() => { changeAnimation("favorite"); changeRating(+0.3); }}>
                     <Image src={imgFavorite}></Image>
                 </button>
-                <button className={styles.like} onClick={() => changeRating(+0.1)}>
+                <button className={styles.like} onClick={() => { changeAnimation("like"); changeRating(+0.1); }}>
                     <Image src={imgLike}></Image>
                 </button>
             </div>
-        </div>
-    )
+        </div >
+    );
 }

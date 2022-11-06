@@ -1,0 +1,14 @@
+.anim_popout
+{
+    animation: popout 500ms ease-out;
+}
+
+@keyframes popout
+{
+    100%
+    {
+        width: 200px;
+        height: 200px;
+        opacity: 1;
+    }
+}

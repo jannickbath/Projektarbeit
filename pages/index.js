@@ -10,25 +10,6 @@ export default function Home()
 {
     const [data, setData] = useState();
 
-    // const placeholders = {
-    //     hotels: [
-    //         {
-    //             id: 1,
-    //             name: "placeholder",
-    //             description: "placeholder description",
-    //             distance: 5,
-    //             images: []
-    //         },
-    //         {
-    //             id: 2,
-    //             name: "placeholder" + "2",
-    //             description: "placeholder description" + "2",
-    //             distance: 5,
-    //             images: []
-    //         },
-    //     ]
-    // };
-
     const [rating, setRating] = useState({
         "0": 1,
         "1": 1
@@ -40,14 +21,20 @@ export default function Home()
 
     function changeRating(amount)
     {
-        const randInt = randomIntFromInterval(0, data.hotels.length - 1);
-        setRating({
-            ...rating,
-            [hotelId]: rating[hotelId] + amount
-        });
+        const animationDuration = 500; //ms
 
-        data.hotels[hotelId].images.splice(0, 1); // remove image after review
-        setHotelId(randInt);// set to some random id
+        setTimeout(() =>
+        {
+            const randInt = randomIntFromInterval(0, data.hotels.length - 1);
+            setRating({
+                ...rating,
+                [hotelId]: rating[hotelId] + amount
+            });
+
+            data.hotels[hotelId].images.splice(0, 1); // remove image after review
+            setHotelId(randInt);// set to some random id
+        }, animationDuration);
+
     }
 
     function randomIntFromInterval(min, max)
