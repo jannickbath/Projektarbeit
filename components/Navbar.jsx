@@ -19,9 +19,9 @@ export default function Navbar(props)
 
    function handleNavigationMap()
    {
+      // Clear images, so the map shows up
       modifyData((data) =>
       {
-         console.log(data);
          data.hotels.forEach(hotel =>
          {
             hotel.images = [];

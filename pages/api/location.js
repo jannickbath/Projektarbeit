@@ -38,6 +38,13 @@ export default function handler(req, res)
                     distance: distance,
                     images: imagesSecond
                 },
+                {
+                    id: 3,
+                    name: name + "3",
+                    description: description + "3",
+                    distance: distance,
+                    images: [...imagesFirst, ...imagesSecond]
+                }
             ],
             success: true
         });

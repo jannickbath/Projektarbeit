@@ -17,22 +17,43 @@ export default function Home()
 
     const [hotelId, setHotelId] = useState(0);
 
+    // Recursive function to get a hotel-id with existing images, while still beeing random order
+    function getRandomHotelId()
+    {
+        const randInt = randomIntFromInterval(0, data.hotels.length - 1);
+
+        // // Make sure there are still images to show
+        const imagesAvailable = data.hotels.some(hotel =>
+        {
+            return hotel.images.length > 0;
+        });
+
+        if (imagesAvailable) {
+            // If newly generated hotel has images to show
+            if (data.hotels[randInt].images.length > 0) {
+                return randInt;
+            }
+            getRandomHotelId();
+        }
+
+        // If there are no images left, just use the first hotel --> map gets rendered
+        return 0;
+    }
+
     function changeRating(amount)
     {
         const animationDuration = 500; //ms
 
         setTimeout(() =>
         {
-            const randInt = randomIntFromInterval(0, data.hotels.length - 1);
             setRating({
                 ...rating,
                 [hotelId]: rating[hotelId] + amount
             });
 
-            data.hotels[hotelId].images.splice(0, 1); // remove image after review
-            setHotelId(randInt);// set to some random id
+            data.hotels[hotelId].images.splice(0, 1); // remove first image after review
+            setHotelId(getRandomHotelId());
         }, animationDuration);
-
     }
 
     function randomIntFromInterval(min, max)
@@ -46,6 +67,8 @@ export default function Home()
         setData(cb({ ...data }));
     }
 
+    const currentImages = data ? data.hotels[hotelId].images.length > 0 : false;
+
     return (
         <>
             {
@@ -53,7 +76,8 @@ export default function Home()
                     <>
                         <Navbar modifyData={modifyData} />
                         {
-                            data.hotels[hotelId].images.length > 1 ?
+                            // Any images on the current hotel?
+                            currentImages ?
                                 <Selection data={data.hotels[hotelId]} changeRating={changeRating} />
                                 :
                                 <Map />
