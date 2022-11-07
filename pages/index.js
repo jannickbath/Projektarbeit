@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styles from "../styles/Search.module.css";
 
 // Components
 import Navbar from '../components/Navbar';
 import Selection from '../components/Selection';
 import Map from "../components/Map";
+import Search from "../components/Search";
 
 export default function Home()
 {
@@ -16,8 +16,6 @@ export default function Home()
     });
 
     const [hotelId, setHotelId] = useState(0);
-
-    const [search, setSearch] = useState("");
 
     function changeRating(amount)
     {
@@ -42,15 +40,10 @@ export default function Home()
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    function handleSubmit(e)
+    function modifyData(cb)
     {
-        // Prevents page refresh
-        e.preventDefault();
-
-        // Fetch hotel data from local api
-        fetch(`/api/location?location=${search}`)
-            .then(data => data.json())
-            .then(data => setData(data));
+        // spread operator for react to rerender on property change
+        setData(cb({ ...data }));
     }
 
     return (
@@ -58,7 +51,7 @@ export default function Home()
             {
                 data ?
                     <>
-                        <Navbar />
+                        <Navbar modifyData={modifyData} />
                         {
                             data.hotels[hotelId].images.length > 1 ?
                                 <Selection data={data.hotels[hotelId]} changeRating={changeRating} />
@@ -67,12 +60,7 @@ export default function Home()
                         }
                     </>
                     :
-                    <div className={styles.search}>
-                        <form onSubmit={(e) => handleSubmit(e)} method="POST">
-                            <input type="text" onChange={(e) => setSearch(e.target.value)} />
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
+                    <Search modifyData={modifyData} />
             }
         </>
     );
