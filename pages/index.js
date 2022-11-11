@@ -3,7 +3,7 @@ import { useState } from 'react';
 // Components
 import Navbar from '../components/Navbar';
 import Selection from '../components/Selection';
-import Map from "../components/Map";
+import Map from "../components/OlMap";
 import Search from "../components/Search";
 
 export default function Home()
