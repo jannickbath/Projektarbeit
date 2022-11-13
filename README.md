@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Live
+
+from: https://git.jannickus.com/jbath/Projektarbeitv2
+under http://projektarbeitv2.prod.jannickus.com/
+
 ## Getting Started
 
 First, run the development server:
