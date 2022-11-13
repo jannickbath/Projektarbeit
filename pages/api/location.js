@@ -23,12 +23,17 @@ export default function handler(req, res)
 
     if (query.location == "rostock") {
         res.status(200).json({
+            location: {
+                name: "rostock",
+                coordinates: [12.078792942930813, 54.101337831632584]
+            },
             hotels: [
                 {
                     id: 1,
                     name: name,
                     description: description,
                     distance: distance,
+                    coordinates: [12.093020020168026, 24.0971237795784],
                     images: imagesFirst
                 },
                 {
@@ -36,6 +41,7 @@ export default function handler(req, res)
                     name: name + "2",
                     description: description + "2",
                     distance: distance,
+                    coordinates: [24.093020020168026, 12.0971237795784],
                     images: imagesSecond
                 },
                 {
@@ -43,6 +49,7 @@ export default function handler(req, res)
                     name: name + "3",
                     description: description + "3",
                     distance: distance,
+                    coordinates: [28.0930234020168026, 69.0271237795784],
                     images: [...imagesFirst, ...imagesSecond]
                 }
             ],

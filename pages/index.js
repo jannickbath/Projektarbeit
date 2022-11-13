@@ -80,7 +80,7 @@ export default function Home()
                             currentImages ?
                                 <Selection data={data.hotels[hotelId]} changeRating={changeRating} />
                                 :
-                                <Map />
+                                <Map data={data} />
                         }
                     </>
                     :
